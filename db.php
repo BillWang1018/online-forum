@@ -1,4 +1,8 @@
 <?php
     // replace mydatabase.db to actual path
-    $db = new PDO('sqlite:mydatabase.db');
+    try {
+        $db = new PDO('sqlite:mydatabase.db');
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
 ?>
