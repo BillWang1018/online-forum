@@ -84,23 +84,23 @@
 		<?php
 			// collect post infomation 
 			$mysql="select manageid from post_area where areaid=$areaid";
-			$find = mysqli_query($db, $mysql);
-			$findmanage = mysqli_fetch_assoc($find);
+			$find = $db->query($mysql);
+			$findmanage = $find->fetch(PD0::FETCH_ASSOC);
 			$manageid=$findmanage['manageid'];
 			$sql = "select * from post where postid = $postid";
-			$result = mysqli_query($db, $sql);
-			$row = mysqli_fetch_assoc($result);
+			$result = $db->query($sql);
+			$row = $result->fetch(PD0::FETCH_ASSOC);
 			$postname=$row['postname'];
 			$article=$row['article'];
 			$showInput = ($userid) ? 1 : 0;
 			$uid=$row['uid'];
 			$mysql="select * from register_user where userid = $uid";
-			$find = mysqli_query($db, $mysql);
-			$findname = mysqli_fetch_assoc($find);
+			$find = $db->query($mysql);
+			$findname = $find->fetch(PD0::FETCH_ASSOC);
 			$username=($uid) ? $findname['name'] : '';
 			$mysql="select * from register_user where userid = ".($userid ? $userid : '""');
-			$find = mysqli_query($db, $mysql);
-			$findname = mysqli_fetch_assoc($find);
+			$find = $db->query($mysql);
+			$findname = $find->fetch(PD0::FETCH_ASSOC);
 			$permissionlvl = ($userid) ? $findname['permission_level'] : 0;
 			// show post message
 			echo "<div class='flex-center full-width'>";
@@ -135,8 +135,8 @@
 				// like btn
 				if ($showInput==1) {
 					$sql = "select COUNT(*) as liked from likeuserid where pid=$postid AND uid=$userid";
-					$result = mysqli_query($db, $sql);
-					$icon = "icon/thumbs-up-" . ((mysqli_fetch_assoc($result)['liked']!=0) ? "black" : "hollow") . ".svg"; 
+					$result = $db->query($sql);
+					$icon = "icon/thumbs-up-" . (($result->fetch(PD0::FETCH_ASSOC)['liked']!=0) ? "black" : "hollow") . ".svg"; 
 					echo "<input type='image' name='submit' src=$icon alt='LIKE' 
 							class='pos-ref icon-btn' style='left:30%'>";
 
@@ -146,8 +146,8 @@
 				}
 				// like count
 				$sql="select * from likeuserid where pid=$postid";
-				$result = mysqli_query($db,$sql);
-				echo "<p class=pos-ref style='left:calc(30% + 50px); top:-40px; width: 50px'>" . mysqli_num_rows($result) . "</p>";
+				$result = $db->query($sql);
+				echo "<p class=pos-ref style='left:calc(30% + 50px); top:-40px; width: 50px'>" . $result->rowCount() . "</p>";
 			?>
 		</form>
 		</div>
@@ -169,13 +169,13 @@
 			<?php
 				// show all comments
 				$sql="select uid,text from message where pid=$postid";
-				$result = mysqli_query($db,$sql);
+				$result = $db->query($sql);
 				echo "<hr>";
-				while($row=mysqli_fetch_assoc($result)) {
+				while($row=$result->fetch(PD0::FETCH_ASSOC)) {
 					$uid=$row['uid'];
 					$mysql="select name from register_user where userid=$uid";
-					$mysqlre =mysqli_query($db,$mysql);
-					$row2= mysqli_fetch_assoc($mysqlre);
+					$mysqlre =$db->query($mysql);
+					$row2= $mysqlre->fetch(PD0::FETCH_ASSOC);
 					$name=$row2['name'];
 					$text=$row['text'];	
 					echo "<dir class=full-width style='margin:0 0'>";
@@ -195,7 +195,7 @@
 			$userid=$_POST['userid'];
 			$areaid=$_POST['areaid'];
 			$sql = "INSERT INTO message(uid,pid,text) VALUES ('$userid', '$postid','$text')";
-			if (!mysqli_query($db, $sql)) {	
+			if (!$db->query($sql)) {	
 				die(mysqli_error($db));
 			}
 			else {

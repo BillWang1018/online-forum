@@ -6,15 +6,15 @@ $userid=$_GET['userid'];
 $areaid=$_GET['areaid'];
 echo $postid;
 $sql ="delete from message where pid=$postid";
-if (!mysqli_query($db, $sql)) {
+if (!$db->query($sql)) {
         die(mysqli_error($con));
 }
 $sql ="delete from likeuserid where pid=$postid";
-if (!mysqli_query($db, $sql)) {
+if (!$db->query($sql)) {
         die(mysqli_error($con));
 }
 $sql = "delete from post where postid='$postid'";
-if (!mysqli_query($db, $sql)) {
+if (!$db->query($sql)) {
         die(mysqli_error($con));
 }
 else {

@@ -30,10 +30,10 @@ if (!$name) {
 session_start();
 include "db.php";
 $sql = "select * from guestbook";
-$result = mysqli_query($db, $sql);
+$result = $db->query($sql);
 $_SESSION['name'] = $name = $_GET['name'];
 //從資料庫中撈留言紀錄並顯示出來
-while ($row = mysqli_fetch_assoc($result)) {
+while ($row = $result->fetch(PD0::FETCH_ASSOC)) {
 	echo "<br>Visitor Name：" . $row['name'];
 	echo "<br>Subject：" . $row['subject'];
 	echo "<br>Content：" . nl2br($row['content']) . "<br>";
@@ -48,7 +48,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 echo "<br>";
 echo '<div class="bottom left position-abs content">';
-echo "There are " . mysqli_num_rows($result) . " messages.";
+echo "There are " . $result->rowCount() . " messages.";
 ?>
 </div>
 </body>

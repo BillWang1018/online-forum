@@ -5,10 +5,10 @@
     $areaid = $_GET['areaid'];
     header("Location: viewAreaList.php?userid=$userid");
     $sql ="select * from collect_area where uid=$userid and aid=$areaid";
-    $result = mysqli_query($db,$sql);
-    if ($rows = mysqli_num_rows($result)==0){
+    $result = $db->query($sql);
+    if ($rows = $result->rowCount()==0){
         $sql = "INSERT INTO collect_area (uid, aid) VALUES ('$userid', '$areaid')";
-        if (!mysqli_query($db, $sql)) {
+        if (!$db->query($sql)) {
             die('Error: ' . mysqli_error($db));
         }
         else {
@@ -20,7 +20,7 @@
     }
     else {
         $sql = "DELETE FROM collect_area WHERE uid=$userid and aid=$areaid";
-        if (!mysqli_query($db, $sql)) {
+        if (!$db->query($sql)) {
             die('Error: ' . mysqli_error($db));
         }
         else {

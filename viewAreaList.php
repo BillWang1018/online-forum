@@ -65,8 +65,8 @@
 		else {
 			// Get user info from db
 			$sql ="select * from register_user where userid=$userid";
-			$result = mysqli_query($db,$sql);
-			$row = mysqli_fetch_assoc($result);
+			$result = $db->query($sql);
+			$row = $result->fetch(PD0::FETCH_ASSOC);
 			echo "<a href='viewAreaList.php?userid=".$userid."'> <button class='bubbles'> <b> Bubbles </b> </button> </a>";
 			echo '<a href="index.php"> <button class="upper-right-button"> <b> Log Out </b> </button> </a>';
 			echo "<a href='userinfo.php?userid=" . $userid . "&areaid=0&postid=0'> <button class='account'> <b> Account </b> </button> </a>";
@@ -85,9 +85,9 @@
 			<?php
 				// Find area info from db
 				$sql = "select * from post_area";
-				$result = mysqli_query($db, $sql);
+				$result = $db->query($sql);
 				// Show every area
-				while ($row = mysqli_fetch_assoc($result)) {
+				while ($row = $result->fetch(PD0::FETCH_ASSOC)) {
 					$areaname=$row['areaname'];
 					$areaid=$row['areaid'];
 					// Container for each area
@@ -96,8 +96,8 @@
 					// Check if area is favorated by user
 					if ($userid) {
 						$sql = "select COUNT(*) as fav from collect_area where uid=$userid AND aid=$areaid";
-						$is_favCount = mysqli_query($db, $sql);
-						$is_fav = mysqli_fetch_assoc($is_favCount)['fav'] != 0;
+						$is_favCount = $db->query($sql);
+						$is_fav = $is_favCount->fetch(PD0::FETCH_ASSOC)['fav'] != 0;
 						// Choose image(star) to display
 						$star_style = "icon/star-" . ($is_fav ? "black" : "hollow") . ".svg" ;
 						echo 	"<a href='collectArea.php?areaid=$areaid&userid=$userid' class='star icon-btn'> <img src=$star_style alt='Favorite' class='fit'	> </a>";

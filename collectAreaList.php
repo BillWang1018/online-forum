@@ -82,8 +82,8 @@
 		// Toolbar for member
 		else {
 			$sql ="select * from register_user where userid=$userid";
-			$result = mysqli_query($db,$sql);
-			$row = mysqli_fetch_assoc($result);
+			$result = $db->query($sql);
+			$row = $result->fetch(PD0::FETCH_ASSOC);
 			echo "<a href='viewAreaList.php?userid=". $userid . "'> <button class='bubbles'> <b> Bubbles </b> </button> </a>";
 			echo '<a href="index.php"> <button class="upper-right-button"> <b> Log Out </b> </button> </a>';
 			echo "<a href='userinfo.php?userid=" . $userid . "&areaid=0&postid=0'> <button class='account'> <b> Account </b> </button> </a>";
@@ -102,9 +102,9 @@
 				FROM post_area pa
 				JOIN collect_area ca ON pa.areaid = ca.aid
 				WHERE ca.uid = $userid";
-				$result = mysqli_query($db, $sql);
+				$result = $db->query($sql);
 				//從資料庫中撈留言紀錄並顯示出來
-				while ($row = mysqli_fetch_assoc($result)) {
+				while ($row = $result->fetch(PD0::FETCH_ASSOC)) {
 					$areaname=$row['areaname'];
 					$areaid=$row['areaid'];
 					// Container for each area

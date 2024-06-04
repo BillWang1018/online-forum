@@ -14,10 +14,10 @@
         $password = $_POST['password'];
         if ($name && $password) {
             $sql = "select * from register_user where name = '$name' and password='$password'";
-            $result = mysqli_query($db, $sql);
-            $rows = mysqli_num_rows($result);
+            $result = $db->query($sql);
+            $rows = $result->rowCount();
             if ($rows) {
-                $output=mysqli_fetch_assoc($result);
+                $output=$result->fetch(PD0::FETCH_ASSOC);
                 $userid=$output['userid'];
                 echo '<div class="sucess">welcome！ </div>';
                 echo "

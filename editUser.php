@@ -64,7 +64,7 @@
         else {
             $query = "SELECT * FROM register_user WHERE  userid=" . $_GET['userid'] .""; 
         }
-        $result = mysqli_query($db, $query);
+        $result = $db->query($query);
         while ($rs = mysqli_fetch_array($result)) {
     ?>
     <form name="form1" action="editUser.php" method="post">
@@ -100,7 +100,7 @@
         $conpass=$_POST['conpass'];
         if($conpass==$password){
             $sql = "update register_user set password='$password',name='$name' where userid='$userid'";
-            if (!mysqli_query($db, $sql)) {
+            if (!$db->query($sql)) {
                 die(mysqli_error($con));
             }
             else {

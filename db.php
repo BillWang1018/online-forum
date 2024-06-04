@@ -1,7 +1,4 @@
 <?php
-    /*$server_name = 'localhost';
-    $username = 'root';
-    $password = '';
-    $db_name = 'board';*/
-    $db = mysqli_connect('localhost', 'root', '', 'online_forum') or die(mysqli_error($con));
+    // replace mydatabase.db to actual path
+    $db = new PD0('sqlite:mydatabase.db');
 ?>

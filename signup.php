@@ -15,11 +15,11 @@
         $password = $_POST['password'];
         if ($name && $password) {
             $sql = "select * from register_user where name = '$name'";
-            $result = mysqli_query($db, $sql);
-            $rows = mysqli_num_rows($result);
+            $result = $db->query($sql);
+            $rows = $result->rowCount();
             if (!$rows) { //若這個username還未被使用過
                 $sql = "insert register_user(permission_level,name,password) values (1,'$name','$password')";
-                mysqli_query($db, $sql);
+                $db->query($sql);
 
                 if (!$result) {
                     die('Error: ' . mysqli_error($con));

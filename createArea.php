@@ -53,15 +53,15 @@
         $areaname=$_POST['areaname'];
         $manager=$_POST['manager'];
         $sql="select * from register_user where name = '$manager'";
-        $result=mysqli_query($db, $sql);
-        $row = mysqli_fetch_assoc($result);
+        $result=$db->query($sql);
+        $row = $result->fetch(PD0::FETCH_ASSOC);
         $manageid=$row['userid'];
         if ($row['permission_level'] == 1) {
             $sql = "update register_user set permission_level=2 where userid='$manageid'";
-            mysqli_query($db, $sql);
+            $db->query($sql);
         }
         $sql = "INSERT post_area(manageid,areaname) VALUES ('$manageid','$areaname')";
-        if (!mysqli_query($db, $sql)) {
+        if (!$db->query($sql)) {
             die(mysqli_error($db));
         }
         else {

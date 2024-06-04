@@ -79,12 +79,12 @@
 	<?php
 		include "db.php";
 		$sql="select * from register_user where userid = ".($userid ? $userid : '""');
-		$result = mysqli_query($db, $sql);
-		$row = mysqli_fetch_assoc($result);
+		$result = $db->query($sql);
+		$row = $result->fetch(PD0::FETCH_ASSOC);
 		$permissionlvl = ($userid) ? $row['permission_level'] : 0;
 		$sql = "select * from post_area where areaid=$areaid";
-		$result = mysqli_query($db, $sql);
-		$areaName = mysqli_fetch_assoc($result)['areaname'];
+		$result = $db->query($sql);
+		$areaName = $result->fetch(PD0::FETCH_ASSOC)['areaname'];
 		echo "<div>";
 		echo "<div style='text-align: center;'>";
 		echo "<h1> Welcome to #$areaName </h1>";
@@ -92,7 +92,7 @@
 		echo "<p class='dir'> Choose a post to view content! </p>";
 		echo "</div>";
 		$sql = "select * from post where aid=$areaid";
-		$result = mysqli_query($db, $sql);
+		$result = $db->query($sql);
 		$_SESSION['userid'] = $userid = $_GET['userid'];
 		//從資料庫中撈留言紀錄並顯示出來
 		echo "<div style=display:flex;justify-content:center;>";
@@ -101,7 +101,7 @@
 			echo "<a href='board.php?userid=" . $userid . "&areaid=". $areaid ."'> <button class='write-post'> <b> + New Post </b> </button> </a>";
 		}
 		echo "<hr>";
-		while ($row = mysqli_fetch_assoc($result)) {
+		while ($row = $result->fetch(PD0::FETCH_ASSOC)) {
 			$postname=$row['postname'];
 			$postid=$row['postid'];
 			$uid=$row['uid'];

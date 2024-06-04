@@ -16,8 +16,8 @@
         $areaid = $_GET['areaid'];
     }
     $sql = "select * from register_user where userid=$userid";
-    $result = mysqli_query($db, $sql);
-    $output=mysqli_fetch_assoc($result);
+    $result = $db->query($sql);
+    $output=$result->fetch(PD0::FETCH_ASSOC);
     $name=$output['name'];
 ?>
 
@@ -62,7 +62,7 @@
         $postname = $_POST['postname'];
         $article = $_POST['article'];
         $sql = "INSERT post(uid,aid,postname,article) VALUES ('$userid', '$areaid', '$postname', '$article')";
-        if (!mysqli_query($db, $sql)) {
+        if (!$db->query($sql)) {
             die(mysqli_error($db));
         }
         else {

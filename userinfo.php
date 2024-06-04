@@ -49,10 +49,10 @@
 			// session_start();
 			include "db.php";
 			$sql = "select * from register_user where userid = '$userid'";
-			$result = mysqli_query($db, $sql);
+			$result = $db->query($sql);
 			$_SESSION['userid'] = $userid = $_GET['userid'];
 			//從資料庫中撈留言紀錄並顯示出來
-			while ($row = mysqli_fetch_assoc($result)) {
+			while ($row = $result->fetch(PD0::FETCH_ASSOC)) {
 				echo "<b> User Name </b> <br>" . $row['name'];
 				echo "<br> <br> <b> Password </b> <br>" . $row['password'];
 				echo '<br> <a href=" editUser.php?userid=' . $userid . '&areaid=' .$areaid.'&postid='.$postid.'"> <button class="edit"> Edit Your Infomation </button> </a>';
