@@ -62,7 +62,7 @@
         }
         $sql = "INSERT post_area(manageid,areaname) VALUES ('$manageid','$areaname')";
         if (!$db->query($sql)) {
-            die(mysqli_error($db));
+            echo '<div> error at createArea.php </div>';
         }
         else {
             //若成功將留言存進資料庫，會自動跳轉到顯示留言的頁面

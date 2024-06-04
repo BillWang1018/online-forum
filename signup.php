@@ -22,9 +22,9 @@
                 $db->query($sql);
 
                 if (!$result) {
-                    die('Error: ' . mysqli_error($con));
+                    echo '<div> error at signup.php </div>';
                 } else {
-                    $userid = mysqli_insert_id($db);
+                    $userid = ($db)->lastInsertId();
                     echo '<div class="success">Sign up successfully ！</div>';
                     echo "
                         <script>
@@ -49,7 +49,7 @@
                     setTimeout(function(){window.location.href='login.php';},2000);
                 </script>";
         }
-        mysqli_close($db);
+        ($db)->close();
     }
 ?>
 

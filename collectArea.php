@@ -9,7 +9,7 @@
     if ($rows = $result->rowCount()==0){
         $sql = "INSERT INTO collect_area (uid, aid) VALUES ('$userid', '$areaid')";
         if (!$db->query($sql)) {
-            die('Error: ' . mysqli_error($db));
+            echo '<div> error at collectArea.php </div>';
         }
         else {
             echo "
@@ -21,7 +21,7 @@
     else {
         $sql = "DELETE FROM collect_area WHERE uid=$userid and aid=$areaid";
         if (!$db->query($sql)) {
-            die('Error: ' . mysqli_error($db));
+            echo '<div> error at collectArea.php </div>';
         }
         else {
             echo "

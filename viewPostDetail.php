@@ -196,7 +196,7 @@
 			$areaid=$_POST['areaid'];
 			$sql = "INSERT INTO message(uid,pid,text) VALUES ('$userid', '$postid','$text')";
 			if (!$db->query($sql)) {	
-				die(mysqli_error($db));
+				echo '<div> error at viewPostDetail.php </div>';
 			}
 			else {
 				echo "

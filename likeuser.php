@@ -11,7 +11,7 @@
     if ($rows = $result->rowCount()==0) {
         $sql = "INSERT INTO likeuserid (uid, pid) VALUES ('$userid', '$postid')";
         if (!$db->query($sql)) {
-            die('Error: ' . mysqli_error($db));
+            echo '<div> error at likeuser.php </div>';
         }
         else {
             echo "
@@ -25,7 +25,7 @@
     else {
         $sql = "DELETE FROM likeuserid WHERE uid=$userid and pid=$postid";
         if (!$db->query($sql)) {
-            die('Error: ' . mysqli_error($db));
+            echo '<div> error at likeuser.php </div>';
         }
         else {
             echo "

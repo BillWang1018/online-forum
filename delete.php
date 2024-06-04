@@ -7,15 +7,15 @@ $areaid=$_GET['areaid'];
 echo $postid;
 $sql ="delete from message where pid=$postid";
 if (!$db->query($sql)) {
-        die(mysqli_error($con));
+        echo '<div> error at delete.php </div>';
 }
 $sql ="delete from likeuserid where pid=$postid";
 if (!$db->query($sql)) {
-        die(mysqli_error($con));
+        echo '<div> error at delete.php </div>';
 }
 $sql = "delete from post where postid='$postid'";
 if (!$db->query($sql)) {
-        die(mysqli_error($con));
+        echo '<div> error at delete.php </div>';
 }
 else {
         echo "

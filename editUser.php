@@ -65,7 +65,7 @@
             $query = "SELECT * FROM register_user WHERE  userid=" . $_GET['userid'] .""; 
         }
         $result = $db->query($query);
-        while ($rs = mysqli_fetch_array($result)) {
+        while ($rs = $result->fetch(PDO::FETCH_ASSOC)) {
     ?>
     <form name="form1" action="editUser.php" method="post">
         <div>
@@ -101,7 +101,7 @@
         if($conpass==$password){
             $sql = "update register_user set password='$password',name='$name' where userid='$userid'";
             if (!$db->query($sql)) {
-                die(mysqli_error($con));
+                echo '<div> error at editUser.php </div>';
             }
             else {
                 echo "

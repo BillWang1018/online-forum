@@ -61,15 +61,15 @@
         $areaid=$_POST['areaid'];
         $sql ="delete from message where pid=$postid";
         if (!$db->query($sql)) {
-            die(mysqli_error($con));
+            echo '<div> error at closepost.php </div>';
         }
         $sql ="delete from likeuserid where pid=$postid";
         if (!$db->query($sql)) {
-            die(mysqli_error($con));
+            echo '<div> error at closepost.php </div>';
         }
         $sql = "update post set postname='$violate',article='',isclose=TRUE where postid='$postid'";
         if (!$db->query($sql)) {
-            die(mysqli_error($con));
+            echo '<div> error at closepost.php </div>';
         }
         else {
             echo "

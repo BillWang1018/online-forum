@@ -57,7 +57,7 @@
             $query = "SELECT * FROM post WHERE  postid=" . $_GET['postid'] .""; //選出該位使用者所留下的所有留言
         }
         $result = $db->query($query);
-        while ($rs = mysqli_fetch_array($result)) {
+        while ($rs = $result->fetch(PDO::FETCH_ASSOC)) {
     ?>
     <form name="form1" action="edit.php" method="post">
         <div style="text-align: center;">
@@ -88,7 +88,7 @@
         $areaid=$_POST['areaid'];
         $sql = "update post set postname='$postname',article='$article' where postid='$postid'";
         if (!$db->query($sql)) {
-            die(mysqli_error($con));
+            echo '<div> error at edit.php </div>';
         } else {
             echo "
             <script>

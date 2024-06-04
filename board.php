@@ -63,7 +63,7 @@
         $article = $_POST['article'];
         $sql = "INSERT post(uid,aid,postname,article) VALUES ('$userid', '$areaid', '$postname', '$article')";
         if (!$db->query($sql)) {
-            die(mysqli_error($db));
+            echo '<div> error at board.php </div>';
         }
         else {
         //若成功將留言存進資料庫，會自動跳轉到顯示留言的頁面
