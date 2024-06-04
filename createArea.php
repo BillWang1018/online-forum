@@ -54,7 +54,7 @@
         $manager=$_POST['manager'];
         $sql="select * from register_user where name = '$manager'";
         $result=$db->query($sql);
-        $row = $result->fetch(PD0::FETCH_ASSOC);
+        $row = $result->fetch(PDO::FETCH_ASSOC);
         $manageid=$row['userid'];
         if ($row['permission_level'] == 1) {
             $sql = "update register_user set permission_level=2 where userid='$manageid'";

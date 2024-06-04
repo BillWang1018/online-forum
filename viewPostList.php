@@ -80,11 +80,11 @@
 		include "db.php";
 		$sql="select * from register_user where userid = ".($userid ? $userid : '""');
 		$result = $db->query($sql);
-		$row = $result->fetch(PD0::FETCH_ASSOC);
+		$row = $result->fetch(PDO::FETCH_ASSOC);
 		$permissionlvl = ($userid) ? $row['permission_level'] : 0;
 		$sql = "select * from post_area where areaid=$areaid";
 		$result = $db->query($sql);
-		$areaName = $result->fetch(PD0::FETCH_ASSOC)['areaname'];
+		$areaName = $result->fetch(PDO::FETCH_ASSOC)['areaname'];
 		echo "<div>";
 		echo "<div style='text-align: center;'>";
 		echo "<h1> Welcome to #$areaName </h1>";
@@ -101,7 +101,7 @@
 			echo "<a href='board.php?userid=" . $userid . "&areaid=". $areaid ."'> <button class='write-post'> <b> + New Post </b> </button> </a>";
 		}
 		echo "<hr>";
-		while ($row = $result->fetch(PD0::FETCH_ASSOC)) {
+		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 			$postname=$row['postname'];
 			$postid=$row['postid'];
 			$uid=$row['uid'];

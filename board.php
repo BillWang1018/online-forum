@@ -17,7 +17,7 @@
     }
     $sql = "select * from register_user where userid=$userid";
     $result = $db->query($sql);
-    $output=$result->fetch(PD0::FETCH_ASSOC);
+    $output=$result->fetch(PDO::FETCH_ASSOC);
     $name=$output['name'];
 ?>
 

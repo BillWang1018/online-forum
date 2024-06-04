@@ -17,7 +17,7 @@
             $result = $db->query($sql);
             $rows = $result->rowCount();
             if ($rows) {
-                $output=$result->fetch(PD0::FETCH_ASSOC);
+                $output=$result->fetch(PDO::FETCH_ASSOC);
                 $userid=$output['userid'];
                 echo '<div class="sucess">welcome！ </div>';
                 echo "

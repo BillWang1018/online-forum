@@ -85,22 +85,22 @@
 			// collect post infomation 
 			$mysql="select manageid from post_area where areaid=$areaid";
 			$find = $db->query($mysql);
-			$findmanage = $find->fetch(PD0::FETCH_ASSOC);
+			$findmanage = $find->fetch(PDO::FETCH_ASSOC);
 			$manageid=$findmanage['manageid'];
 			$sql = "select * from post where postid = $postid";
 			$result = $db->query($sql);
-			$row = $result->fetch(PD0::FETCH_ASSOC);
+			$row = $result->fetch(PDO::FETCH_ASSOC);
 			$postname=$row['postname'];
 			$article=$row['article'];
 			$showInput = ($userid) ? 1 : 0;
 			$uid=$row['uid'];
 			$mysql="select * from register_user where userid = $uid";
 			$find = $db->query($mysql);
-			$findname = $find->fetch(PD0::FETCH_ASSOC);
+			$findname = $find->fetch(PDO::FETCH_ASSOC);
 			$username=($uid) ? $findname['name'] : '';
 			$mysql="select * from register_user where userid = ".($userid ? $userid : '""');
 			$find = $db->query($mysql);
-			$findname = $find->fetch(PD0::FETCH_ASSOC);
+			$findname = $find->fetch(PDO::FETCH_ASSOC);
 			$permissionlvl = ($userid) ? $findname['permission_level'] : 0;
 			// show post message
 			echo "<div class='flex-center full-width'>";
@@ -136,7 +136,7 @@
 				if ($showInput==1) {
 					$sql = "select COUNT(*) as liked from likeuserid where pid=$postid AND uid=$userid";
 					$result = $db->query($sql);
-					$icon = "icon/thumbs-up-" . (($result->fetch(PD0::FETCH_ASSOC)['liked']!=0) ? "black" : "hollow") . ".svg"; 
+					$icon = "icon/thumbs-up-" . (($result->fetch(PDO::FETCH_ASSOC)['liked']!=0) ? "black" : "hollow") . ".svg"; 
 					echo "<input type='image' name='submit' src=$icon alt='LIKE' 
 							class='pos-ref icon-btn' style='left:30%'>";
 
@@ -171,11 +171,11 @@
 				$sql="select uid,text from message where pid=$postid";
 				$result = $db->query($sql);
 				echo "<hr>";
-				while($row=$result->fetch(PD0::FETCH_ASSOC)) {
+				while($row=$result->fetch(PDO::FETCH_ASSOC)) {
 					$uid=$row['uid'];
 					$mysql="select name from register_user where userid=$uid";
 					$mysqlre =$db->query($mysql);
-					$row2= $mysqlre->fetch(PD0::FETCH_ASSOC);
+					$row2= $mysqlre->fetch(PDO::FETCH_ASSOC);
 					$name=$row2['name'];
 					$text=$row['text'];	
 					echo "<dir class=full-width style='margin:0 0'>";

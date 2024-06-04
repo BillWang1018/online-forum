@@ -33,7 +33,7 @@ $sql = "select * from guestbook";
 $result = $db->query($sql);
 $_SESSION['name'] = $name = $_GET['name'];
 //從資料庫中撈留言紀錄並顯示出來
-while ($row = $result->fetch(PD0::FETCH_ASSOC)) {
+while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	echo "<br>Visitor Name：" . $row['name'];
 	echo "<br>Subject：" . $row['subject'];
 	echo "<br>Content：" . nl2br($row['content']) . "<br>";

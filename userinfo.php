@@ -52,7 +52,7 @@
 			$result = $db->query($sql);
 			$_SESSION['userid'] = $userid = $_GET['userid'];
 			//從資料庫中撈留言紀錄並顯示出來
-			while ($row = $result->fetch(PD0::FETCH_ASSOC)) {
+			while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 				echo "<b> User Name </b> <br>" . $row['name'];
 				echo "<br> <br> <b> Password </b> <br>" . $row['password'];
 				echo '<br> <a href=" editUser.php?userid=' . $userid . '&areaid=' .$areaid.'&postid='.$postid.'"> <button class="edit"> Edit Your Infomation </button> </a>';

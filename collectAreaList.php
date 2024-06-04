@@ -83,7 +83,7 @@
 		else {
 			$sql ="select * from register_user where userid=$userid";
 			$result = $db->query($sql);
-			$row = $result->fetch(PD0::FETCH_ASSOC);
+			$row = $result->fetch(PDO::FETCH_ASSOC);
 			echo "<a href='viewAreaList.php?userid=". $userid . "'> <button class='bubbles'> <b> Bubbles </b> </button> </a>";
 			echo '<a href="index.php"> <button class="upper-right-button"> <b> Log Out </b> </button> </a>';
 			echo "<a href='userinfo.php?userid=" . $userid . "&areaid=0&postid=0'> <button class='account'> <b> Account </b> </button> </a>";
@@ -104,7 +104,7 @@
 				WHERE ca.uid = $userid";
 				$result = $db->query($sql);
 				//從資料庫中撈留言紀錄並顯示出來
-				while ($row = $result->fetch(PD0::FETCH_ASSOC)) {
+				while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 					$areaname=$row['areaname'];
 					$areaid=$row['areaid'];
 					// Container for each area

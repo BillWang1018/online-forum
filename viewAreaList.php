@@ -66,7 +66,7 @@
 			// Get user info from db
 			$sql ="select * from register_user where userid=$userid";
 			$result = $db->query($sql);
-			$row = $result->fetch(PD0::FETCH_ASSOC);
+			$row = $result->fetch(PDO::FETCH_ASSOC);
 			echo "<a href='viewAreaList.php?userid=".$userid."'> <button class='bubbles'> <b> Bubbles </b> </button> </a>";
 			echo '<a href="index.php"> <button class="upper-right-button"> <b> Log Out </b> </button> </a>';
 			echo "<a href='userinfo.php?userid=" . $userid . "&areaid=0&postid=0'> <button class='account'> <b> Account </b> </button> </a>";
@@ -87,7 +87,7 @@
 				$sql = "select * from post_area";
 				$result = $db->query($sql);
 				// Show every area
-				while ($row = $result->fetch(PD0::FETCH_ASSOC)) {
+				while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 					$areaname=$row['areaname'];
 					$areaid=$row['areaid'];
 					// Container for each area
@@ -97,7 +97,7 @@
 					if ($userid) {
 						$sql = "select COUNT(*) as fav from collect_area where uid=$userid AND aid=$areaid";
 						$is_favCount = $db->query($sql);
-						$is_fav = $is_favCount->fetch(PD0::FETCH_ASSOC)['fav'] != 0;
+						$is_fav = $is_favCount->fetch(PDO::FETCH_ASSOC)['fav'] != 0;
 						// Choose image(star) to display
 						$star_style = "icon/star-" . ($is_fav ? "black" : "hollow") . ".svg" ;
 						echo 	"<a href='collectArea.php?areaid=$areaid&userid=$userid' class='star icon-btn'> <img src=$star_style alt='Favorite' class='fit'	> </a>";
