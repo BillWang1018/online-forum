@@ -11,13 +11,13 @@
     if (isset($_POST['submit'])) {
         include 'db.php';
         $name = $_POST['name'];
-        $password = $_POST['password'];
+	$password = $_POST['password'];
         if ($name && $password) {
-            $sql = "select * from register_user where name = '$name' and password='$password'";
-            $result = $db->query($sql);
-            $rows = $result->rowCount();
-            if ($rows) {
-                $output=$result->fetch(PDO::FETCH_ASSOC);
+            $sql = "select count(*) as c, * from register_user where name = '$name' and password='$password'";
+	    $result = $db->query($sql);
+	    $output = $result->fetch(PDO::FETCH_ASSOC);
+	    #echo "<h3> $name | $password | " . print_r($result) . "</h3>";
+            if ($output['c']) {
                 $userid=$output['userid'];
                 echo '<div class="sucess">welcome！ </div>';
                 echo "
@@ -34,7 +34,7 @@
             echo '<div class="warning">Incompleted form！ </div>';
             echo "<script> setTimeout(function(){window.location.href='index.php';},2000); </script>";
         }
-        ($db)->close();
+        
     }
 ?>
 

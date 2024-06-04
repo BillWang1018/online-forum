@@ -14,13 +14,12 @@
         $name = $_POST['name'];
         $password = $_POST['password'];
         if ($name && $password) {
-            $sql = "select * from register_user where name = '$name'";
+            $sql = "select count(*) as c, * from register_user where name = '$name'";
             $result = $db->query($sql);
-            $rows = $result->rowCount();
-            if (!$rows) { //若這個username還未被使用過
+            $output = $result->fetch(PDO::FETCH_ASSOC);
+            if (!$output['c']) { //若這個username還未被使用過
                 $sql = "insert register_user(permission_level,name,password) values (1,'$name','$password')";
-                $db->query($sql);
-
+                $result = $db->query($sql);
                 if (!$result) {
                     echo '<div> error at signup.php </div>';
                 } else {
@@ -49,7 +48,7 @@
                     setTimeout(function(){window.location.href='login.php';},2000);
                 </script>";
         }
-        ($db)->close();
+        
     }
 ?>
 
