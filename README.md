@@ -1,5 +1,5 @@
 # Database Schema
-see /sqlite-schema.sqlite
+see [sqlite-schema.sqlite]
  # online-forum
 ### board.php -> 新增貼文
 ### collectAreaList.php -> 查看已訂閱版區
