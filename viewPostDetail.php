@@ -190,7 +190,6 @@
 	<?php
 	//送出留言後會執行下面這段程式碼
 		if (isset($_POST['submit'])&&$_POST['text']!=null) {
-			echo '<div class="success">Added successfully ！</div>';
 			$postid = $_POST['postid'];
 			$text = $_POST['text'];
 			$userid=$_POST['userid'];
@@ -200,6 +199,7 @@
 				echo '<div> error at viewPostDetail.php </div>';
 			}
 			else {
+				echo '<div class="success">Added successfully ！</div>';
 				echo "
 					<script>
 						setTimeout(function(){window.location.href='viewPostDetail.php?userid=" . $userid . "&areaid=" . $areaid . "&postid=".$postid."';},500);

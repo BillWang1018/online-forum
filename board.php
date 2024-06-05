@@ -3,8 +3,8 @@
 <title> Write Post </title>
 
 <?php
+    include "db.php";
     include "style.html";
-    include 'db.php';
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userid = $_POST['userid'];
         $areaid=$_POST['areaid'];
@@ -48,34 +48,32 @@
             <button type="submit" name="submit" value="SEND" class="submit"> <b> Send </b> </button>
         </div>
     </form>
+    <?php
+        //送出留言後會執行下面這段程式碼
+        if (isset($_POST['submit'])) {
+            $userid = $_POST['userid'];
+            $areaid=$_POST['areaid'];
+            $postname = $_POST['postname'];
+            $article = $_POST['article'];
+            $sql = "INSERT INTO post(uid,aid,postname,article) VALUES ('$userid', '$areaid', '$postname', '$article')";
+            if (!$db->query($sql)) {
+                echo '<div> error at board.php </div>';
+                echo '<div class="success"> Your Post Added Successfully！ </div>';
+            }
+            else {
+            //若成功將留言存進資料庫，會自動跳轉到顯示留言的頁面
+                echo "
+                    <script>
+                        setTimeout(function(){window.location.href='viewPostList.php?userid=" . $userid . "&areaid=" . $areaid . "';},500);
+                    </script>";
+            }
+        }
+        /*
+        else {
+            echo '<div class="success">Click <strong>Send</strong> when you\'re done.</div>';
+        }
+        */
+    ?>
 </body>
 
 </html>
-
-<?php
-    //送出留言後會執行下面這段程式碼
-    if (isset($_POST['submit'])) {
-        include "db.php";
-        echo '<div class="success"> Your Post Added Successfully！ </div>';
-        $userid = $_POST['userid'];
-        $areaid=$_POST['areaid'];
-        $postname = $_POST['postname'];
-        $article = $_POST['article'];
-        $sql = "INSERT INTO post(uid,aid,postname,article) VALUES ('$userid', '$areaid', '$postname', '$article')";
-        if (!$db->query($sql)) {
-            echo '<div> error at board.php </div>';
-        }
-        else {
-        //若成功將留言存進資料庫，會自動跳轉到顯示留言的頁面
-            echo "
-                <script>
-                    setTimeout(function(){window.location.href='viewPostList.php?userid=" . $userid . "&areaid=" . $areaid . "';},500);
-                </script>";
-        }
-    }
-    /*
-    else {
-        echo '<div class="success">Click <strong>Send</strong> when you\'re done.</div>';
-    }
-    */
-?>
