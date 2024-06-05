@@ -1,0 +1,41 @@
+BEGIN TRANSACTION;
+CREATE TABLE register_user (
+ name text not null,
+password text not null,permission_level integer null,userid integer primary key autoincrement);
+INSERT INTO register_user VALUES('root','root',3,1);
+CREATE TABLE post_area (
+areaname text not null,
+areaid integer PRIMARY KEY AUTOINCREMENT,
+manageid integer not null,
+foreign key (manageid) references register_user (userid));
+CREATE TABLE post (
+article text null,
+postname text not null,
+postid integer primary key AUTOINCREMENT,
+aid integer not null,
+uid integer not null,
+isclose integer DEFAULT 0,
+foreign key (aid) REFERENCES post_area (areaid),
+foreign key (uid) REFERENCES register_user (userid));
+CREATE TABLE message (
+messageid integer primary key AUTOINCREMENT,
+text TEXT null,
+uid integer not null,
+pid integer not null,
+foreign key (uid) REFERENCES  register_user (userid),
+foreign key (pid) REFERENCES  post (postid));
+CREATE TABLE likeuserid (
+uid integer not null,
+pid integer not null,
+primary key (uid,pid),
+foreign key (uid) REFERENCES register_user (userid),
+foreign key (pid) REFERENCES post (postid));
+CREATE TABLE collect_area (
+uid integer not null,
+aid integer not null,
+primary key (uid,aid),
+foreign key (uid) REFERENCES register_user (userid),
+foreign key (aid) REFERENCES post_area (areaid));
+DELETE FROM sqlite_sequence;
+INSERT INTO sqlite_sequence VALUES('register_user',1);
+COMMIT;
