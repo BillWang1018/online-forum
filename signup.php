@@ -18,7 +18,7 @@
             $result = $db->query($sql);
             $output = $result->fetch(PDO::FETCH_ASSOC);
             if (!$output['c']) { //若這個username還未被使用過
-                $sql = "insert register_user(permission_level,name,password) values (1,'$name','$password')";
+                $sql = "insert into register_user(permission_level,name,password) values (1,'$name','$password')";
                 $result = $db->query($sql);
                 if (!$result) {
                     echo '<div> error at signup.php </div>';

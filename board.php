@@ -61,7 +61,7 @@
         $areaid=$_POST['areaid'];
         $postname = $_POST['postname'];
         $article = $_POST['article'];
-        $sql = "INSERT post(uid,aid,postname,article) VALUES ('$userid', '$areaid', '$postname', '$article')";
+        $sql = "INSERT INTO post(uid,aid,postname,article) VALUES ('$userid', '$areaid', '$postname', '$article')";
         if (!$db->query($sql)) {
             echo '<div> error at board.php </div>';
         }

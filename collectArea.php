@@ -4,9 +4,10 @@
     $userid = $_GET['userid'];
     $areaid = $_GET['areaid'];
     header("Location: viewAreaList.php?userid=$userid");
-    $sql ="select * from collect_area where uid=$userid and aid=$areaid";
+    $sql ="select count(*) as c, * from collect_area where uid=$userid and aid=$areaid";
     $result = $db->query($sql);
-    if ($rows = $result->rowCount()==0){
+    $rows = $result->fetch(PDO::FETCH_ASSOC);
+    if (!$rows['c']){
         $sql = "INSERT INTO collect_area (uid, aid) VALUES ('$userid', '$areaid')";
         if (!$db->query($sql)) {
             echo '<div> error at collectArea.php </div>';

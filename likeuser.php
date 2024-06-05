@@ -6,9 +6,10 @@
     $postid = $_POST['postid'];
     $userid = $_POST['userid'];
     $areaid = $_POST['areaid'];
-    $sql ="select * from likeuserid where uid=$userid and pid=$postid";
+    $sql ="select count(*) as c, * from likeuserid where uid=$userid and pid=$postid";
     $result = $db->query($sql);
-    if ($rows = $result->rowCount()==0) {
+    $rows = $result->fetch(PDO::FETCH_ASSOC);
+    if (!$rows['c']) {
         $sql = "INSERT INTO likeuserid (uid, pid) VALUES ('$userid', '$postid')";
         if (!$db->query($sql)) {
             echo '<div> error at likeuser.php </div>';

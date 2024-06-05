@@ -60,7 +60,7 @@
             $sql = "update register_user set permission_level=2 where userid='$manageid'";
             $db->query($sql);
         }
-        $sql = "INSERT post_area(manageid,areaname) VALUES ('$manageid','$areaname')";
+        $sql = "INSERT INTO post_area(manageid,areaname) VALUES ('$manageid','$areaname')";
         if (!$db->query($sql)) {
             echo '<div> error at createArea.php </div>';
         }

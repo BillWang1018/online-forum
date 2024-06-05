@@ -29,7 +29,7 @@ if (!$name) {
 <?php
 session_start();
 include "db.php";
-$sql = "select * from guestbook";
+$sql = "select count(*) as c, * from guestbook";
 $result = $db->query($sql);
 $_SESSION['name'] = $name = $_GET['name'];
 //從資料庫中撈留言紀錄並顯示出來
@@ -48,7 +48,7 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 }
 echo "<br>";
 echo '<div class="bottom left position-abs content">';
-echo "There are " . $result->rowCount() . " messages.";
+echo "There are " . $row['c'] . " messages.";
 ?>
 </div>
 </body>

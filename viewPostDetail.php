@@ -145,9 +145,10 @@
 							class='pos-ref icon-btn' style='left:30%'>";
 				}
 				// like count
-				$sql="select * from likeuserid where pid=$postid";
+				$sql="select count(*) as c, * from likeuserid where pid=$postid";
 				$result = $db->query($sql);
-				echo "<p class=pos-ref style='left:calc(30% + 50px); top:-40px; width: 50px'>" . $result->rowCount() . "</p>";
+				$row = $result->fetch(PDO::FETCH_ASSOC);
+				echo "<p class=pos-ref style='left:calc(30% + 50px); top:-40px; width: 50px'>" . $row['c'] . "</p>";
 			?>
 		</form>
 		</div>
